@@ -19,6 +19,7 @@ node {
         
         stage('Deploy to Heroku') {
             echo 'Deploying to Heroku...'
+            sh 'env'
             withCredentials([usernamePassword(credentialsId: 'heroku', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                 sh "git push https://${USERNAME}:${PASSWORD}@git.heroku.com/warm-hollows-29053.git ${env.BRANCH_NAME}:master"
             }
