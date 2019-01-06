@@ -4,7 +4,7 @@ node {
 
     try {
         stage('Checkout source code') {
-            git branch: 'master', url: 'https://github.com/mszewczyk/node-js-sample/'
+            git branch: env.BRANCH_NAME, url: 'https://github.com/mszewczyk/node-js-sample/'
         }
         
         stage('Install dependencies') {
