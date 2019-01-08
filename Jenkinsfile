@@ -9,6 +9,6 @@ node {
       packageApplication()
       deployToHeroku appName: 'warm-hollows-29053'
     } finally {
-      deletingDependencies()
+      deleteDependencies()
     }
 }
