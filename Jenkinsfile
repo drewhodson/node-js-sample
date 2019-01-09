@@ -4,7 +4,7 @@ node {
 
     try {
         stage('Checkout source code') {
-            checkout scm
+            git branch: '01-simple-pipeline', url: 'https://github.com/mszewczyk/node-js-sample/'
         }
         
         stage('Install dependencies') {
@@ -21,7 +21,7 @@ node {
           if (env.TAG_NAME) {
             echo 'Deploying to Heroku...'
             withCredentials([usernamePassword(credentialsId: 'heroku', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-                sh "git push https://${USERNAME}:${PASSWORD}@git.heroku.com/warm-hollows-29053.git ${env.TAG_NAME}:master"
+                sh "git push https://${USERNAME}:${PASSWORD}@git.heroku.com/warm-hollows-29053.git 01-simple-pipeline:master"
             }
           } else {
             echo 'Not a release. Skipping deployment.'
