@@ -1,10 +1,12 @@
+def branch = '00-gui-pipeline'
+
 node {
     env.NODEJS_HOME = "${tool 'NodeJS'}"
     env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
 
     try {
         stage('Checkout source code') {
-            git branch: 'master', url: 'https://github.com/mszewczyk/node-js-sample/'
+            git branch: branch, url: 'https://github.com/mszewczyk/node-js-sample/'
         }
         
         stage('Install dependencies') {
@@ -20,7 +22,7 @@ node {
         stage('Deploy to Heroku') {
             echo 'Deploying to Heroku...'
             withCredentials([usernamePassword(credentialsId: 'heroku', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-                sh "git push https://${USERNAME}:${PASSWORD}@git.heroku.com/warm-hollows-29053.git HEAD:master"
+                sh "git push https://${USERNAME}:${PASSWORD}@git.heroku.com/warm-hollows-29053.git ${branch}:master"
             }
         }
     } finally {
