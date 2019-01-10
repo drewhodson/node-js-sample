@@ -37,10 +37,16 @@ node {
     } finally {
         stage('Deleting dependencies') {
             echo 'Deleting dependencies...'
-            cleanWs patterns: [[
+            cleanWs patterns: [
+                  [
                     pattern: 'node_modules',
                     type: 'INCLUDE'
-                ]],
+                  ],
+                  [ 
+                    pattern: '*.tgz',
+                    type: 'INCLUDE'
+                  ]
+                ],
                 deleteDirs: true
         }
     }
