@@ -1,4 +1,4 @@
-def branch = '00-gui-pipeline'
+def branch = '01-gui-pipeline'
 
 node {
     env.NODEJS_HOME = "${tool 'NodeJS'}"
@@ -12,6 +12,11 @@ node {
         stage('Install dependencies') {
             echo 'Installing dependencies...'
             sh 'npm install'
+        }
+        
+        stage('Test application') {
+            echo 'Testing application...'
+            sh 'npm test'
         }
         
         stage('Package application') {
@@ -28,10 +33,16 @@ node {
     } finally {
         stage('Deleting dependencies') {
             echo 'Deleting dependencies...'
-            cleanWs patterns: [[
-                    pattern: 'node_modules',
-                    type: 'INCLUDE'
-                ]],
+            cleanWs patterns: [
+                    [
+                        pattern: 'node_modules',
+                        type: 'INCLUDE'
+                    ],
+                    [
+                        pattern: '*.tgz',
+                        type: 'INCLUDE'
+                    ]
+                ],
                 deleteDirs: true
         }
     }
