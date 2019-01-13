@@ -6,6 +6,7 @@ node {
     try {
       checkoutSourceCode()
       installDependencies()
+      testApplication()
       packageApplication()
       deployToHeroku appName: 'warm-hollows-29053'
     } finally {
