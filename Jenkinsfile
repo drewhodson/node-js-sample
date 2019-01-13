@@ -1,10 +1,12 @@
-@Library('shared-libraries@phase1')_
+@Library('shared-libraries@phase2')
+import com.dminc.GitCommit
 
 node {
     setupEnvironment()
 
     try {
-      checkoutSourceCode()
+      GitCommit gitCommit = checkoutSourceCode()
+      echo "Git commit id is ${gitCommit.id}."
       installDependencies()
       testApplication()
       packageApplication()
