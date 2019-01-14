@@ -8,7 +8,7 @@ node {
       installDependencies()
       testApplication()
       packageApplication()
-      deployToHeroku appName: 'warm-hollows-29053'
+      deployToHeroku appName: 'mszewczyk-node-js-sample-1'
     } finally {
       deleteDependencies()
     }
