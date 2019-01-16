@@ -27,7 +27,7 @@ node {
         stage('Deploy to Heroku') {
           echo 'Deploying to Heroku...'
           withCredentials([usernamePassword(credentialsId: 'heroku', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-              sh "git push -f https://${USERNAME}:${PASSWORD}@git.heroku.com/mszewczyk-node-js-sample-1.git ${branch}:master"
+              sh "git push -f https://${USERNAME}:${PASSWORD}@git.heroku.com/dehodson-node-js-sample.git ${branch}:master"
           }
         }
     } finally {
